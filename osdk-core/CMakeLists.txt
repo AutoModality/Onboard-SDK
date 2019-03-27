@@ -104,9 +104,8 @@ if (CMAKE_SYSTEM_NAME MATCHES Linux)
   FILE(GLOB OSDK_LIB_SRCS ${OSDK_LIB_SRCS} platform/linux/src/*.cpp)
 endif()
 
-add_library(${PROJECT_NAME}
-        STATIC
-        ${OSDK_LIB_SRCS})
+MESSAGE("THING ${PROJECT_NAME}")
+add_library(djiosdk-core SHARED ${OSDK_LIB_SRCS})
 
 ## Libraries to propagate as dependencies to third-party code depending on osdk-core
 ## Append to this variable when you want a dependency to get propagated
@@ -186,7 +185,7 @@ endforeach()
 
 # Add all targets to the build-tree export set
 export(TARGETS djiosdk-core
-        FILE "${PROJECT_BINARY_DIR}/djiosdkTargets.cmake")
+       FILE "${PROJECT_BINARY_DIR}/djiosdkTargets.cmake")
 
 # Export the package for use from the build-tree
 # (this registers the build-tree with a global CMake-registry)
@@ -244,8 +243,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         PUBLIC_HEADER "${OSDK_LIB_HEADERS}")
 
 install(TARGETS ${PROJECT_NAME}
+  DESTINATION lib
         EXPORT djiosdkTargets
-        ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
+        # ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
         PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}" COMPONENT dev
         )
 
