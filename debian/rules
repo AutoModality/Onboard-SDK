@@ -27,13 +27,15 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 override_dh_auto_configure:
 	dh_auto_configure -- 						\
 	-DADVANCED_SENSING:BOOL=ON                                      \
-	-DLIB_INSTALL_DIR:STRING="lib/$(DEB_HOST_MULTIARCH)"		\
 	-DCMAKE_SKIP_RPATH=ON -DPCL_ENABLE_SSE=OFF			\
+	-DCMAKE_INSTALL_PREFIX=$(DESTDIR)/usr/local 			\
 	$(BUILD_DOC)
 
 %:
 	dh  $@ --builddirectory=build
 
+override_dh_usrlocal:
+	@echo "Doing nothing"
 
 get-orig-source:
 	uscan --verbose --force-download --repack --compress xz
