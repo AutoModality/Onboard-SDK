@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+# Hardening.
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS) -g1 -std=c++11
+LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+
+CFLAGS+=$(CPPFLAGS)
+CXXFLAGS+=$(CPPFLAGS)
+
+ifneq (,$(filter $(DEB_BUILD_ARCH),mips mipsel))
+	CXXFLAGS+=--param ggc-min-expand=20
+endif
+
+BUILD_DOC = $(if $(shell dh_listpackages | grep libpcl-doc),-DWITH_DOCS=ON)
+
+# Multiarch.
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+.PHONY: override_dh_auto_configure \
+	override_dh_install \
+	override_dh_installchangelogs
+
+override_dh_auto_configure:
+	dh_auto_configure -- 						\
+	-DADVANCED_SENSING:BOOL=ON                                      \
+	-DLIB_INSTALL_DIR:STRING="lib/$(DEB_HOST_MULTIARCH)"		\
+	-DCMAKE_SKIP_RPATH=ON -DPCL_ENABLE_SSE=OFF			\
+	$(BUILD_DOC)
+
+%:
+	dh  $@ --builddirectory=build
+
+
+get-orig-source:
+	uscan --verbose --force-download --repack --compress xz
+

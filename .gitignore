@@ -52,3 +52,8 @@ cmake_install.cmake
 Makefile
 osdk-core/advanced-sensing-*
 osdk-core/v1-1.0.0
+debian/am-onboard-sdk
+debian/*.log
+debian/*.substvars
+debian/*stamp
+debian/files

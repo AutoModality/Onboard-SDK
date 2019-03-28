@@ -1,0 +1,16 @@
+Source: am-onboard-sdk
+Maintainer: Jimi Damon <jdamon@automodality.com>
+Section: libs
+Priority: extra
+Build-Depends: debhelper (>= 9),cmake
+Homepage: https://github.com/AutoModality/Onboard-SDK
+Standards-Version: 4.0.0
+
+
+Package: am-onboard-sdk
+Architecture: any
+Section: libdevel
+Depends: ${misc:Depends}
+Suggests: libpcl-doc
+Description: Onboard SDK for DJI
+
