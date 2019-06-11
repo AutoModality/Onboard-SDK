@@ -56,3 +56,4 @@ debian/am-onboard-sdk/
 debian/am-onboard-sdk.debhelper.log
 debian/am-onboard-sdk.substvars
 debian/debhelper-build-stamp
+debian/files
