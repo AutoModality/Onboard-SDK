@@ -23,9 +23,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(djiosdk-advanced-sensing-sample)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -g -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -pthread -g -O0")
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/osdk-core/cmake-modules/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${ONBOARDSDK_SOURCE}/cmake-modules/")
 
 find_package(LibUSB REQUIRED)
 include_directories(${LIBUSB_1_INCLUDE_DIRS})
@@ -43,7 +43,7 @@ add_subdirectory(stereo_vision_single_thread_sample)
 add_subdirectory(stereo_vision_multi_thread_sample)
 add_subdirectory(camera_stream_poll_sample)
 add_subdirectory(camera_stream_callback_sample)
-#add_subdirectory(stereo_vision_depth_perception_sample)
+add_subdirectory(stereo_vision_depth_perception_sample)
 
 if (TARGET_TRACKING_SAMPLE)
   add_subdirectory(camera_stream_target_tracking_sample)

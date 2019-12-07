@@ -1,12 +1,6 @@
-am-onboard-sdk (1.0.1) xenial; urgency=medium
+onboard-sdk (3.8.1-1) UNRELEASED; urgency=low
 
-  * am-onboard-sdk                 3006793acc44bdd958b6
-    https://github.com/AutoModality/Onboard-SDK/tree/3006793acc44bdd
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
 
- -- Jimi Damon <jdamon@automodality.com>  Tue, 11 Jun 2019 16:29:07 -0700
-
-am-onboard-sdk (1.0.0) stable; urgency=medium
-
-  * Build of onboard sdk
-
- -- Jimi Damon <jdamon@automodality.com>  Thu, 28 Mar 2019 17:18:03 +0000
+ -- Jimi Damon <jdamon@automodality.com>  Fri, 06 Dec 2019 22:39:19 -0800

@@ -52,7 +52,8 @@ main(int argc, char** argv)
     << "| Available commands:                                            |"
     << std::endl;
   std::cout
-    << "| [a] Exercise gimbal and camera control                         |"
+    << "| [a] Exercise gimbal and camera control                         |\n"
+    << "| [b] Exercise camera zoom control                               |"
     << std::endl;
   char inputChar;
   std::cin >> inputChar;
@@ -61,6 +62,9 @@ main(int argc, char** argv)
   {
     case 'a':
       gimbalCameraControl(vehicle);
+      break;
+    case 'b':
+      cameraZoomControl(vehicle);
       break;
     default:
       break;

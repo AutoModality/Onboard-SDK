@@ -31,6 +31,12 @@
 #define HARDSYNC_H
 
 #include "dji_type.hpp"
+#include "dji_vehicle_callback.hpp"
+#include <string>
+
+#if defined(__linux__)
+#include <atomic>
+#endif
 
 namespace DJI
 {
@@ -62,8 +68,43 @@ public:
 
 #pragma pack()
 
+  typedef enum NMEAType
+  {
+    GPGSA,
+    GLGSA,
+    GAGSA,
+    BDGSA,
+    GPRMC,
+    TYPENUM
+  }NMEAType;
+
+  typedef enum PPSSource
+  {
+    INTERNAL_GPS,
+    EXTERNAL_GPS,
+    RTK
+  }PPSSource;
+
+#if STM32
+  typedef time_ms RecvTimeMsg;
+#elif defined(__linux__)
+  typedef timespec RecvTimeMsg;
+#endif
+
+  typedef struct NMEAData
+  {
+    std::string sentence;
+    uint32_t seq;
+    RecvTimeMsg timestamp; // this is OSDK recv time
+  }NMEAData;
+
 public:
   HardwareSync(Vehicle* vehiclePtr = 0);
+
+  VehicleCallBackHandler ppsNMEAHandler;
+  VehicleCallBackHandler ppsUTCTimeHandler;
+  VehicleCallBackHandler ppsUTCFCTimeHandler;
+  VehicleCallBackHandler ppsSourceHandler;
 
   /*! @brief Call this API to start sending a hardware pulse and
    *  set up a software packet to accompany it
@@ -77,16 +118,144 @@ public:
    *  packet
    */
   void setSyncFreq(uint32_t freqInHz, uint16_t tag = 0);
-
   /*! @brief Internal setter function that is called by setSyncFreq function
    *  @details Use setSyncFreq instead of this direct interface.
    *
    *  @param data Struct of type SyncCmdData.
    */
   void startSync(SyncSettings& data);
+  /*! @brief Subscribe to NMEA messages with a callback function
+   *
+   *  @param callback callback function
+   *  @param userData user data (void ptr)
+   */
+  void subscribeNMEAMsgs(VehicleCallBack cb, void *userData);
+  /*! @brief Unsubscribe to NMEA messages
+   */
+  void unsubscribeNMEAMsgs();
+  /*! @brief Poll NMEA messages
+   *
+   *  @param which NMEA message to poll
+   *  @param data struct to fill
+   */
+  bool getNMEAMsg(NMEAType type, NMEAData &nmea);
+  /*! @brief Subscribe to UTC Time tag with a callback function
+   *
+   *  @param callback callback function
+   *  @param userData user data (void ptr)
+   */
+  void subscribeUTCTime(VehicleCallBack cb, void *userData);
+  /*! @brief Unsubscribe to UTC time tag
+   */
+  void unsubscribeUTCTime();
+  /*! @brief Poll UTC time tag
+   *
+   *  @param data struct to fill
+   */
+  bool getUTCTime(NMEAData &utc);
+  /*! @brief Subscribe to FC Time in UTC referece with a callback function
+   *
+   *  @param callback callback function
+   *  @param userData user data (void ptr)
+   */
+  void subscribeFCTimeInUTCRef(VehicleCallBack cb, void *userData);
+  /*! @brief Unsubscribe to FC Time in UTC referece
+   */
+  void unsubscribeFCTimeInUTCRef();
+  /*! @brief Poll FC Time in UTC referece
+   *
+   *  @param data struct to fill
+   */
+  bool getFCTimeInUTCRef(DJI::OSDK::ACK::FCTimeInUTC &fcTimeInUTC);
+  /*! @brief Subscribe to PPS source info with a callback function
+   *
+   *  @param callback callback function
+   *  @param userData user data (void ptr)
+   */
+  void subscribePPSSource(VehicleCallBack cb, void *userData);
+  /*! @brief Unsubscribe to PPS source info
+   */
+  void unsubscribePPSSource();
+  /*! @brief Poll PPS source info
+   *
+   *  @param data struct to fill
+   */
+  bool getPPSSource(PPSSource &source);
+  /*! @brief Write data when received from UART
+   *
+   *  @param cmd id
+   *  @param received data
+   */
+  void writeData(const uint8_t cmdID, const RecvContainer *recvContainer);
 
 private:
+  void writeNMEA(const std::string &nmea);
+
   Vehicle* vehicle;
+
+  //pthread_mutex_t mutexHardSync;
+  //pthread_cond_t  condVarHardSync;
+
+  NMEAData GPGSAData;
+  NMEAData GLGSAData;
+  NMEAData GAGSAData;
+  NMEAData BDGSAData;
+  NMEAData GPRMCData;
+  NMEAData UTCData;
+  ACK::FCTimeInUTC fcTimeInUTC;
+  PPSSource  ppsSourceType;
+
+#if STM32
+  typedef bool HWSyncDataFlag;
+#elif defined(__linux__)
+  typedef std::atomic_bool HWSyncDataFlag;
+#endif
+
+ /*! @brief Set the data update flag
+  *
+  *  @param point out the flag need to be changed
+  *  @param set the val for the flag
+  */
+  void setDataFlag(HWSyncDataFlag &flag, bool val);
+
+ /*! @brief Get the data update flag
+  *
+  *  @param point out the flag need to be read
+  */
+  bool getDataFlag(HWSyncDataFlag &flag);
+
+ /*! @brief Record the local timestamp when received the NMEA/UTC data from FC
+  *  @details Pay attention that the local timestamp of linux platform is to get
+  *  the local UTC time. As to STM32 platform, the local timestamp is to get the
+  *  millseconds since boot-up.
+  *
+  *  @param recvTime to record the data reaching time. It is different between
+  *  the linux and STM32 platform.
+  */
+  void recordRecvTimeMsg(RecvTimeMsg &recvTime);
+
+  HWSyncDataFlag GPGSAFlag;
+  HWSyncDataFlag GLGSAFlag;
+  HWSyncDataFlag GAGSAFlag;
+  HWSyncDataFlag BDGSAFlag;
+  HWSyncDataFlag GPRMCFlag;
+  HWSyncDataFlag UTCFlag;
+  HWSyncDataFlag fcTimeFlag;
+  HWSyncDataFlag ppsSourceFlag;
+
+  template <class dataType>
+  bool writeDataHelper(HWSyncDataFlag &flag,
+                       const dataType &msg,
+                       dataType &copyMsg)
+  {
+    if(getDataFlag(flag) == true)
+    {
+      copyMsg = msg;
+      setDataFlag(flag, false);
+      return true;
+    }
+    return false;
+  }
 };
 } // OSDK
 } // DJI

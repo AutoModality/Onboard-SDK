@@ -39,7 +39,7 @@ userActivate()
 
   static char key_buf[65] = "your app_key here";
 
-  DJI::OSDK::Vehicle::ActivateData user_act_data;
+  DJI::OSDK::Vehicle::ActivateData user_act_data = {0};
   user_act_data.ID = 0000; /*your app ID here*/
 
   user_act_data.encKey = key_buf;

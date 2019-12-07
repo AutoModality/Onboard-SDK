@@ -53,6 +53,7 @@
 #include "dji_vehicle_callback.hpp"
 #include "dji_version.hpp"
 #include "dji_virtual_rc.hpp"
+#include "dji_payload_device.hpp"
 #ifdef ADVANCED_SENSING
 #include "dji_advanced_sensing.hpp"
 #endif
@@ -68,6 +69,7 @@
 #include <STM32F4DataGuard.h>
 #elif defined(__linux__)
 #include "posix_thread.hpp"
+
 #endif
 
 namespace DJI
@@ -114,12 +116,13 @@ public:
   Camera*              camera;
   Gimbal*              gimbal;
   MFIO*                mfio;
-  DJI_DEPRECATED MobileCommunication* moc;
+  MobileCommunication* moc;
   MobileDevice*        mobileDevice;
   MissionManager*      missionManager;
   HardwareSync*        hardSync;
   // Supported only on Matrice 100
   VirtualRC* virtualRC;
+  PayloadDevice*       payloadDevice;
 #ifdef ADVANCED_SENSING
   AdvancedSensing* advancedSensing;
 #endif
@@ -235,6 +238,7 @@ public:
   char*             getHwSerialNum() const;
   bool              isLegacyM600();
   bool              isM100();
+  bool              isM210V2();
 
   void setKey(const char* key);
   CircularBuffer* circularBuffer; //! @note not used yet
@@ -288,6 +292,7 @@ public:
   bool    isUSBThreadReady();
 
 private:
+  bool is_activated = false;
   bool encrypt = false;
   Thread* UARTSerialReadThread;
   Thread* callbackThread;
@@ -315,7 +320,8 @@ private:
   ACK::WayPointInit waypointInitACK;
   /*!WayPoint index download command ACK
    * @note Download index settings*/
-  ACK::WayPointIndex waypointIndexACK;
+  ACK::WayPointIndex      waypointIndexACK;
+  ACK::WayPoint2CommonRsp wayPoint2CommonRspACK;
   /*!WayPoint add point command ACK*/
   ACK::WayPointAddPoint waypointAddPointACK;
   ACK::MFIOGet          mfioGetACK;
@@ -341,10 +347,13 @@ private:
    */
 public:
   /*! @brief Initialize all functional Vehicle components
-*  like, Subscription, Broadcast, Control, Gimbal, ect
+*  like, Subscription, Broadcast, Control, ect
 */
   int functionalSetUp();
 
+  /*! @brief Initialize gimbal component
+*/
+  bool GimbalSetUp();
 private:
   /*! @brief Initialize minimal Vehicle components
 */
@@ -374,6 +383,7 @@ private:
   bool initMissionManager();
   bool initHardSync();
   bool initVirtualRC();
+  bool initPayloadDevice();
 #ifdef ADVANCED_SENSING
   bool initAdvancedSensing();
 #endif
@@ -441,10 +451,12 @@ public:
   PlatformManager* getPlatformManager() const;
   void setEncryption(bool encryptSetting);
   bool getEncryption();
+  bool getActivationStatus();
   MobileDevice* getMobileDevice();
 
 private:
   PlatformManager* platformManager;
+  void setActivationStatus(bool is_activated);
 };
 }
 }
