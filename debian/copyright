@@ -1,5 +1,5 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: onboard-sdk
+Upstream-Name: am-onboard-sdk
 Source: <url://example.com>
 
 Files:     osdk-core/api/inc/dji_ack.hpp
@@ -208,7 +208,9 @@ Files:     .clang-format
            osdk-core/api/inc/dji_payload_device.hpp
            osdk-core/api/src/dji_mobile_device.cpp
            osdk-core/api/src/dji_payload_device.cpp
+           osdk-core/cmake-modules/DJIOSDKConfig.cmake
            osdk-core/cmake-modules/DJIOSDKConfig.cmake.in
+           osdk-core/cmake-modules/DJIOSDKConfigVersion.cmake
            osdk-core/cmake-modules/DJIOSDKConfigVersion.cmake.in
            osdk-core/cmake-modules/DownloadProject/DownloadProject.CMakeLists.cmake.in
            osdk-core/cmake-modules/DownloadProject/DownloadProject.cmake
@@ -467,26 +469,26 @@ License:   __UNKNOWN__
 
 #----------------------------------------------------------------------------
 # xml and html files (skipped):
-#         sample/STM32/OnBoardSDK_STM32/Project/OnBoardSDK_STM32.uvprojx
-#         sample/Qt/djiosdk-qt-sample/resources.qrc
 #         sample/Qt/djiosdk-qt-sample/qtosdk.ui
-#         sample/Qt/djiosdk-qt-sample/Subscribe/subscribe_panel.ui
-#         sample/Qt/djiosdk-qt-sample/CameraGimbalControl/camera_gimbal_control_panel.ui
-#         sample/Qt/djiosdk-qt-sample/Broadcast/broadcast.ui
+#         sample/Qt/djiosdk-qt-sample/resources.qrc
 #         sample/Qt/djiosdk-qt-sample/Missions/hotpoint_panel.ui
 #         sample/Qt/djiosdk-qt-sample/Missions/qwaypoints.ui
+#         sample/Qt/djiosdk-qt-sample/Broadcast/broadcast.ui
 #         sample/Qt/djiosdk-qt-sample/FlightControl/flight_control_panel.ui
+#         sample/Qt/djiosdk-qt-sample/Subscribe/subscribe_panel.ui
 #         sample/Qt/djiosdk-qt-sample/MFIO/mfio_panel.ui
+#         sample/Qt/djiosdk-qt-sample/CameraGimbalControl/camera_gimbal_control_panel.ui
+#         sample/STM32/OnBoardSDK_STM32/Project/OnBoardSDK_STM32.uvprojx
 
 #----------------------------------------------------------------------------
 # binary files (skipped):
-#         sample/STM32/OnBoardSDK_STM32/Lib/CMSIS/libarm_cortexM4lf_math.a
-#         sample/Qt/djiosdk-qt-sample/images/check-square.png
+#         utility/bin/linux/x86-64/M210ConfigTool
+#         utility/bin/armv8/64-bit/M210ConfigTool
+#         utility/bin/armv7/32-bit/M210ConfigTool
 #         sample/Qt/djiosdk-qt-sample/images/dji_logo_gray.png
 #         sample/Qt/djiosdk-qt-sample/images/caret-down.png
-#         utility/bin/linux/x86-64/M210ConfigTool
-#         utility/bin/armv7/32-bit/M210ConfigTool
-#         utility/bin/armv8/64-bit/M210ConfigTool
+#         sample/Qt/djiosdk-qt-sample/images/check-square.png
+#         sample/STM32/OnBoardSDK_STM32/Lib/CMSIS/libarm_cortexM4lf_math.a
 
 #----------------------------------------------------------------------------
 # Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following

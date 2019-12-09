@@ -39,3 +39,11 @@ You can get support from DJI and the community with the following methods:
 - Github Issues or [gitter.im](https://gitter.im/dji-sdk/Onboard-SDK)
 - Post questions on [**Stackoverflow**](http://stackoverflow.com) using [**dji-sdk**](http://stackoverflow.com/questions/tagged/dji-sdk) tag
 - [**DJI Forum**](http://forum.dev.dji.com/en)
+
+
+
+## How to build into a Debian Package
+
+```{bash}
+dpkg-buildpackage    -b -us -uc
+```
