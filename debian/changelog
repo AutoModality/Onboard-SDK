@@ -1,3 +1,9 @@
+am-onboard-sdk (3.8.1-rc2) amrelease; urgency=medium
+
+  * Fixes for building with AdvancedSensing
+
+ -- Jimi Damon <jdamon@automodality.com>  Mon, 09 Dec 2019 20:51:19 -0800
+
 am-onboard-sdk (3.8.1-1) amrelease; urgency=low
 
   [ jdamon@automodality.com ]
