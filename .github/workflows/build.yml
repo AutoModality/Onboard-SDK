@@ -10,8 +10,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1      
-    - name: Docker Login
-      run: docker login -username cloudsmith-push --password=${{secrets.CLOUDSMITH_API_KEY}}
     - name: Make
       uses: docker://docker.cloudsmith.io/automodality/trial/amros-base:latest      
     - run:  |
