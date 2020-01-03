@@ -10,11 +10,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1      
-    - name: Make
-      uses: docker://docker.cloudsmith.io/automodality/trial/amros-base:latest      
-    - run:  |
-        mkdir build
-        cd build
-        cmake .. -DADVANCED_SENSING:BOOL=ON
-        make djiosdk-core
+    - name: Make   
+    - run:  docker run -v ~/am/github/Onboard-SDK/:/github/workspace -t docker.cloudsmith.io/automodality/trial/amros-base /github/workspace/make.sh
 
