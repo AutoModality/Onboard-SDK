@@ -1,0 +1,22 @@
+name: Story Development
+on: 
+  push:
+    branches-ignore:
+      - master
+jobs:
+  make:
+    runs-on: ubuntu-16.04
+    name: Make
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1      
+    - name: Docker Login
+      run: docker login -username cloudsmith-push --password=${{secrets.CLOUDSMITH_API_KEY}}
+    - name: Make
+      uses: docker://docker.cloudsmith.io/automodality/trial/amros-base:latest      
+    - run:  |
+        mkdir build
+        cd build
+        cmake .. -DADVANCED_SENSING:BOOL=ON
+        make djiosdk-core
+
