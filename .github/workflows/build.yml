@@ -11,5 +11,5 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1      
     - name: Make   
-      uses: .github/actions/make@local
+      uses: ./.github/actions/make@local
 
