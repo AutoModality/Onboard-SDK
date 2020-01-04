@@ -34,7 +34,7 @@ echo "$package_name ($version) unstable; urgency=low" > debian/changelog
 fakeroot debian/rules clean #ensures no residue
 fakeroot debian/rules binary #performs the package
 
-artifact_filename=$(ls .. | grep $project_name) #the package is generated in base directory
+artifact_filename=$(ls .. | grep $package_name) #the package is generated in base directory
 artifact_path="$staging_dir/$artifact_filename"
 mv "../$artifact_filename" $staging_dir
 
