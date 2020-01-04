@@ -14,7 +14,7 @@ cd /github/workspace
 source /opt/ros/kinetic/setup.bash
 
 #see action.yml for inputs
-
+NONE="None"
 version=${1:-999.0.0-local} # the version of the generated package
 echo "version is $version"
 
@@ -22,9 +22,9 @@ echo "version is $version"
 # see also https://medium.com/@fonseka.live/sharing-data-in-github-actions-a9841a9a6f42
 staging_dir=${2:-'./build'} 
 
-package_name=${3:-'None'}
+package_name=${3:-$NONE}
 
-if [[ package_name == 'None' ]]; then
+if [[ package_name == $NONE ]]; then
     package_name="$(basename $(git config remote.origin.url |sed "s/\.git$//"))"
 fi
 
