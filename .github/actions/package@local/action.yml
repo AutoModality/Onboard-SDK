@@ -7,8 +7,12 @@ inputs:
     required: true
   staging-dir: 
     description: 'The directory where the artifact can be found by other actions.'
-    required: true
+    required: false
     default: '/github/home'
+  package-name: 
+    description: 'The resulting filename.  Project name will be used if not provided.'
+    required: false
+    default: 'None'
 outputs:
   artifact-path:
     description: 'The file path where the artifact can be found'
@@ -19,3 +23,4 @@ runs:
   args: # see entrypoint.sh for the recipient of these
     - ${{ inputs.version }}
     - ${{ inputs.staging-dir }}
+    - ${{ inputs.package-name }}

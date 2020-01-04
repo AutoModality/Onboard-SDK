@@ -18,6 +18,7 @@ jobs:
         uses: ./.github/actions/package@local
         with:
           version: ${{ github.event.number }}.${{ github.event.pull_request.head.ref }}.${{ steps.buildnumber.outputs.build_number }}
+          package-name: am-onboard-sdk
       - name: The generated package
         run: echo "The artifact is ${{ steps.package.outputs.artifact-path }}"
       - name: Deploy

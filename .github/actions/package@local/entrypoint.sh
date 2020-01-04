@@ -22,8 +22,13 @@ echo "version is $version"
 # see also https://medium.com/@fonseka.live/sharing-data-in-github-actions-a9841a9a6f42
 staging_dir=${2:-'./build'} 
 
-project_name="$(basename $(git config remote.origin.url |sed "s/\.git$//"))"
-echo "$project_name ($version) unstable; urgency=low" > debian/changelog
+package_name=${3:-'None'}
+
+if [[ package_name == 'None' ]]; then
+    package_name="$(basename $(git config remote.origin.url |sed "s/\.git$//"))"
+fi
+
+echo "$package_name ($version) unstable; urgency=low" > debian/changelog
 
 
 fakeroot debian/rules clean #ensures no residue
