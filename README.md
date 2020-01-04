@@ -5,11 +5,11 @@ DEPRECATED: This project is derived from the DJI Onboard SDK.  It has been modif
 | ------------- | ------------- |
 | [![Story Development](https://github.com/AutoModality/Onboard-SDK/workflows/Story%20Development/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Story+Development%22) | --  |
 | [![Release Candidate](https://github.com/AutoModality/Onboard-SDK/workflows/Release%20Candidate/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Release+Candidate%22)  | [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/automodality/dev/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/?render=true&badge_token=gAAAAABeD_vke2BohjL_pfwJWkNgvLQeyFbbZ3FnA3IXF_x5JQm4Da4kqnax4vGDlUGEKy8zHE4RpYI0KrzJVve9v0fg8NnrUFuHq8Bm6522B-52WQmixfY%3D)](https://cloudsmith.io/~automodality/repos/dev/packages/detail/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/)  |
-| [![Release](https://github.com/AutoModality/Onboard-SDK/workflows/Release/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Release)  | Release Package |
+| [![Release](https://github.com/AutoModality/Onboard-SDK/workflows/Release/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Release)  | [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/automodality/release/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/?render=true&badge_token=gAAAAABeEA_pMiNQBx63JSb-7hom6D8u31s2BZpxaFN5Nq-tsa9cVlq5_V_TPhBt1bPvCpqhNqVhceMFTAy5qqocMSVUUS-c0zbu6ANWTvlyIgihAplXN2s%3D)](https://cloudsmith.io/~automodality/repos/release/packages/detail/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/) |
 
 
 
-# DJI Onboard SDK (OSDK) 3.8.1
+# AM-DJI Onboard SDK (OSDK) 
 
 [![Join the chat at https://gitter.im/dji-sdk/Onboard-SDK](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dji-sdk/Onboard-SDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
