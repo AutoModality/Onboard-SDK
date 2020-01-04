@@ -24,6 +24,7 @@ jobs:
         uses: ./.github/actions/package@local
         with:
           version: ${{ steps.semantic.outputs.new_release_version }}
+          package-name: am-onboard-sdk
       - name: The generated package
         run: echo "The artifact is ${{ steps.package.outputs.artifact-path }}"
       - name: Deploy

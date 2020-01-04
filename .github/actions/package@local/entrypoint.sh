@@ -28,7 +28,7 @@ if [[ package_name == $NONE ]]; then
     package_name="$(basename $(git config remote.origin.url |sed "s/\.git$//"))"
 fi
 
-echo "$package_name ($version) unstable; urgency=low" > debian/changelog
+echo "$package_name ($version) unstable; urgency=medium" > debian/changelog
 
 
 fakeroot debian/rules clean #ensures no residue
