@@ -1,0 +1,15 @@
+name: Story Development
+on: 
+  push:
+    branches-ignore:
+      - master
+jobs:
+  make:
+    runs-on: ubuntu-16.04
+    name: Make
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1      
+    - name: Make   
+      uses: ./.github/actions/make@local
+

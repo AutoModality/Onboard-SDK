@@ -57,3 +57,5 @@ debian/am-onboard-sdk.debhelper.log
 debian/am-onboard-sdk.substvars
 debian/debhelper-build-stamp
 debian/files
+catkin_ws/*
+.cmake/*
