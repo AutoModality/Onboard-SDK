@@ -10,7 +10,9 @@ DEPRECATED: This project is derived from the DJI Onboard SDK.  It has been modif
 
 ### Test Locally
 
+
 ```
+# replace ~/am/github/Onboard-SDK with your local path
 docker run -v ~/am/github/Onboard-SDK/:/github/workspace -it docker.cloudsmith.io/automodality/trial/amros-base 
 cd /github/workspace
 rm -rf build

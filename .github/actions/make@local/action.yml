@@ -1,6 +1,0 @@
-# action.yml
-name: 'Make on AMROS'
-description: 'Special make on AMROS Base'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

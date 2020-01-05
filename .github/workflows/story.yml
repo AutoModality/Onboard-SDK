@@ -12,4 +12,7 @@ jobs:
       uses: actions/checkout@v1      
     - name: Make   
       uses: AutoModality/action-make-ros@BB-776/common-make
+      with:
+          cmake-args: -DADVANCED_SENSING:BOOL=ON
+          make-args: djiosdk-core
 
