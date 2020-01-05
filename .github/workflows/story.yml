@@ -11,7 +11,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1      
     - name: Make   
-      uses: AutoModality/action-make-ros@BB-776/common-make
+      uses: AutoModality/action-make-ros@v1.0.0
       with:
           cmake-args: -DADVANCED_SENSING:BOOL=ON
           make-args: djiosdk-core
