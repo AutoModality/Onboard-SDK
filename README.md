@@ -8,6 +8,19 @@ DEPRECATED: This project is derived from the DJI Onboard SDK.  It has been modif
 | [![Release](https://github.com/AutoModality/Onboard-SDK/workflows/Release/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Release)  | [![Latest Version @ Cloudsmith](https://api-prd.cloudsmith.io/badges/version/automodality/release/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/?render=true&badge_token=gAAAAABeEA_pMiNQBx63JSb-7hom6D8u31s2BZpxaFN5Nq-tsa9cVlq5_V_TPhBt1bPvCpqhNqVhceMFTAy5qqocMSVUUS-c0zbu6ANWTvlyIgihAplXN2s%3D)](https://cloudsmith.io/~automodality/repos/release/packages/detail/deb/am-onboard-sdk/latest/d=ubuntu%252Fxenial;t=1/) |
 
 
+### Test Locally
+
+
+```
+# replace ~/am/github/Onboard-SDK with your local path
+docker run -v ~/am/github/Onboard-SDK/:/github/workspace -it docker.cloudsmith.io/automodality/trial/amros-base 
+cd /github/workspace
+rm -rf build
+mkdir build
+cd build
+cmake .. -DADVANCED_SENSING:BOOL=ON
+make djiosdk-core
+```
 
 # AM-DJI Onboard SDK (OSDK) 
 
