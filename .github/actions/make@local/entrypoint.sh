@@ -3,8 +3,12 @@
 set -e # fail on error
 
 cd /github/workspace
-rm -rf build
+
+source /opt/ros/kinetic/setup.bash
+
+rm -rf build #clean the build
 mkdir build
 cd build
+
 cmake .. -DADVANCED_SENSING:BOOL=ON
 make djiosdk-core
