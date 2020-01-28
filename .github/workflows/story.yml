@@ -1,18 +1,15 @@
 name: Story Development
-on: 
+
+on:
   push:
     branches-ignore:
       - master
 jobs:
-  make:
+  build:
     runs-on: ubuntu-16.04
-    name: Make
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1      
-    - name: Make   
-      uses: AutoModality/action-make-ros@v1.0.0
-      with:
-          cmake-args: -DADVANCED_SENSING:BOOL=ON
-          make-args: djiosdk-core
+      - uses: actions/checkout@v1
+      - name: Package
+        uses: AutoModality/action-package-debian-ros@BB-780/control-depends
+
 
