@@ -15,7 +15,7 @@ jobs:
           token: ${{secrets.github_token}}
       - name: Package
         id: package
-        uses: AutoModality/action-package-debian-ros@BB-780/control-depends
+        uses: AutoModality/action-package-debian-ros@v1.2.1
         with:
           branch: ${{ github.event.pull_request.head.ref }}
           pull-request-number: ${{ github.event.number }}
