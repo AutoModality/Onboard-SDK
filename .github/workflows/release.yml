@@ -65,7 +65,7 @@ jobs:
       - name: Package if published
         if: steps.published.outputs.value == 'true'
         id: package
-        uses: AutoModality/action-package-debian-ros@v1.3.2
+        uses: AutoModality/action-package-debian-ros@v2.0.0
         with:
           version: ${{ steps.version.outputs.value }}
       - name: Deploy if published
