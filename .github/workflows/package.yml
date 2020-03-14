@@ -9,12 +9,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, [self-hosted,linux,arm64]]
-      fail-fast: true
+      fail-fast: false
     steps:
+      - uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v1
       - name: Package
         id: package
-        uses: AutoModality/action-package-debian-ros@v1.2.1
+        uses: AutoModality/action-package-debian-ros@v3-perception
         with:
           branch: ${{ github.event.pull_request.head.ref }}
           pull-request-number: ${{ github.event.number }}
@@ -31,5 +32,5 @@ jobs:
           owner: 'automodality'
           repo: 'dev'
           distro: 'ubuntu'
-          release: 'xenial'
+          release: 'bionic'
           file: '${{ steps.package.outputs.artifact-path }}'

@@ -1,6 +1,5 @@
 DEPRECATED: This project is derived from the DJI Onboard SDK.  It has been modified, but also emancipated from DJI's project making it difficult to update.  We must make efforts to fork from DJI's so this project can be maintained.
 
-
 | Github Action  | Debian Package |
 | ------------- | ------------- |
 | [![Story Development](https://github.com/AutoModality/Onboard-SDK/workflows/Story%20Development/badge.svg)](https://github.com/AutoModality/Onboard-SDK/actions?query=workflow%3A%22Story+Development%22) | --  |
