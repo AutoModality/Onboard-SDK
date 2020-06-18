@@ -10,4 +10,5 @@ Package: am-onboard-sdk
 Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends}, libusb-dev, libusb-1.0-0-dev, libusb-1.0-0
+Replaces: dji-onboard-sdk
 Description: DJI's Onboard SDK packaged by AutoModality
